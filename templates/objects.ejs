@@ -1,0 +1,92 @@
+<%- include('partials/_header') %>
+
+<div class="container pb-5">
+    <div class="py-4 d-flex flex-column flex-md-row justify-content-between align-items-center gap-4">
+        <div>
+            <h2 class="fw-bold m-0" style="color: var(--text-main);"><i class="bi bi-disc-fill text-primary"></i> Catalogue</h2>
+        </div>
+        
+        <div class="d-flex flex-wrap gap-3">
+            <div class="btn-group view-switcher shadow-sm rounded-pill p-1">
+                <a href="/objects?country=FR&view=<%= view %>&search=<%= searchTerm %>" 
+                   class="btn btn-view <%= country === 'FR' ? 'active-view' : 'inactive-view' %>">
+                   <i class="bi bi-geo-alt"></i> FR
+                </a>
+                <a href="/objects?country=US&view=<%= view %>&search=<%= searchTerm %>" 
+                   class="btn btn-view <%= country === 'US' ? 'active-view' : 'inactive-view' %>">
+                   <i class="bi bi-globe-americas"></i> US
+                </a>
+            </div>
+
+            <div class="btn-group view-switcher shadow-sm rounded-pill p-1">
+                <a href="/objects?view=grid&country=<%= country %>&page=<%= currentPage %>&search=<%= searchTerm %>" 
+                   class="btn btn-view <%= view === 'grid' ? 'active-view' : 'inactive-view' %>">
+                    <i class="bi bi-grid-3x3-gap-fill"></i> <span class="d-none d-md-inline ms-1">Grille</span>
+                </a>
+                <a href="/objects?view=list&country=<%= country %>&page=<%= currentPage %>&search=<%= searchTerm %>" 
+                   class="btn btn-view <%= view === 'list' ? 'active-view' : 'inactive-view' %>">
+                    <i class="bi bi-list-ul"></i> <span class="d-none d-md-inline ms-1">Liste</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <% if (view === 'list') { %>
+        <div class="list-group shadow-sm mb-5 rounded-4 overflow-hidden">
+            <% items.forEach(function(album) { %>
+                <a href="/objects/<%= album.collectionId %>" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between py-3 border-0 border-bottom">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="<%= album.artworkUrl100 %>" class="rounded shadow-sm" style="width: 50px;">
+                        <div>
+                            <h6 class="mb-0 fw-bold text-dark-emphasis"><%= album.collectionName %></h6>
+                            <p class="mb-0 text-muted small"><%= album.artistName %></p>
+                        </div>
+                    </div>
+                    <div class="btn btn-light btn-sm rounded-circle">
+                        <i class="bi bi-chevron-right fs-5"></i>
+                    </div>
+                </a>
+            <% }); %>
+        </div>
+    <% } else { %>
+        <div class="row g-4">
+            <% items.forEach(function(album) { %>
+                <div class="col-lg-3 col-md-4 col-6">
+                    <a href="/objects/<%= album.collectionId %>" class="text-decoration-none">
+                        <div class="apple-card h-100">
+                            <div class="img-container mb-3 position-relative shadow-apple rounded-4 overflow-hidden">
+                                <img src="<%= album.artworkUrl100.replace('100x100bb', '600x600bb') %>" 
+                                     class="img-fluid w-100" alt="Cover">
+                                <div class="play-overlay">
+                                    <i class="bi bi-plus-circle-fill"></i>
+                                </div>
+                            </div>
+                            <div class="px-1 text-start">
+                                <h6 class="fw-bold text-truncate mb-1" style="color: var(--text-main);"><%= album.collectionName %></h6>
+                                <p class="text-muted small mb-0"><%= album.artistName %></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <% }); %>
+        </div>
+    <% } %> <nav class="mt-5">
+        <ul class="pagination justify-content-center gap-3">
+            <li class="page-item <%= currentPage <= 1 ? 'disabled' : '' %>">
+                <a class="page-link rounded-circle border-0 shadow-sm" href="/objects?page=<%= currentPage - 1 %>&view=<%= view %>&country=<%= country %>&search=<%= searchTerm %>">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            </li>
+            <li class="page-item active">
+                <span class="page-link rounded-pill border-0 shadow-sm px-4"><%= currentPage %></span>
+            </li>
+            <li class="page-item">
+                <a class="page-link rounded-circle border-0 shadow-sm" href="/objects?page=<%= currentPage + 1 %>&view=<%= view %>&country=<%= country %>&search=<%= searchTerm %>">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<%- include('partials/_footer') %>

@@ -1,0 +1,543 @@
+/* ==========================================================================
+   VARIABLES DE THÈME (DARK & LIGHT)
+   ========================================================================== */
+:root {
+    /* Mode Sombre (Défaut) */
+    --bg-main: #050505;
+    --bg-card: rgba(255, 255, 255, 0.05);
+    --bg-hero: linear-gradient(180deg, #1d1d1f 0%, #000000 100%);
+    --text-main: #ffffff;
+    --text-muted: #86868b;
+    --glass-bg: rgba(25, 25, 25, 0.8);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --accent-red: #fa243c;
+    --accent-blue: #0071e3;
+}
+
+body.light-mode {
+    /* Mode Clair */
+    --bg-main: #f5f5f7;
+    --bg-card: #ffffff;
+    --bg-hero: linear-gradient(180deg, #ffffff 0%, #ebebeb 100%);
+    --text-main: #1d1d1f;
+    --text-muted: #6e6e73;
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* ==========================================================================
+   STRUCTURE GÉNÉRALE
+   ========================================================================== */
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    margin: 0;
+    padding-bottom: 100px; /* Espace pour le lecteur flottant */
+}
+
+/* Effet de lueur en arrière-plan (Sombre uniquement) */
+body:not(.light-mode)::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 10% 20%, rgba(250, 36, 60, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 113, 227, 0.05) 0%, transparent 40%);
+    z-index: -1;
+}
+
+/* ==========================================================================
+   COMPOSANTS APPLE PREMIUM
+   ========================================================================== */
+
+/* Hero Section */
+.hero-gradient {
+    background: var(--bg-hero);
+    border: 1px solid var(--border-color);
+    border-radius: 40px;
+    padding: 80px 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.hero-title {
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    font-weight: 800;
+    letter-spacing: -3px;
+    background: linear-gradient(to bottom, var(--text-main), var(--text-muted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Album Cards */
+.apple-card {
+    background: var(--bg-card);
+    border-radius: 24px;
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    height: 100%;
+    text-decoration: none !important;
+}
+
+.apple-card:hover {
+    transform: scale(1.03);
+    background: var(--bg-card);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.apple-card img {
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 16px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Mood Cards */
+.mood-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 130px;
+    background: var(--bg-card);
+    border-radius: 22px;
+    text-decoration: none !important;
+    color: var(--text-main) !important;
+    border: 1px solid var(--border-color);
+    transition: 0.3s;
+}
+
+.mood-card i {
+    font-size: 2.2rem;
+    color: var(--color); /* Couleur définie dans le style inline HTML */
+    margin-bottom: 10px;
+}
+
+.mood-card:hover {
+    background: var(--color);
+    color: #ffffff !important;
+    transform: translateY(-8px);
+}
+
+.mood-card:hover i {
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   INTERFACE & PLAYER
+   ========================================================================== */
+
+/* Lecteur Flottant */
+.player-bar {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    height: 75px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-radius: 100px;
+    z-index: 1000;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+/* Footer Apple Style */
+.footer-apple {
+    background: var(--bg-main);
+    border-top: 1px solid var(--border-color);
+    padding: 80px 0 40px;
+}
+
+.footer-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.footer-link:hover {
+    color: var(--accent-red);
+}
+
+/* Boutons */
+.btn-primary { background-color: var(--accent-blue); border: none; border-radius: 100px; }
+.btn-danger { background-color: var(--accent-red); border: none; border-radius: 100px; }
+.btn-outline-light { border-radius: 100px; border: 1px solid var(--border-color); color: var(--text-main); }
+
+/* Utilitaires */
+.text-white { color: var(--text-main) !important; }
+.text-muted { color: var(--text-muted) !important; }
+.shadow-apple { box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+/* Fond avec des orbes de couleur animés */
+.bg-vibrant {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    overflow: hidden;
+    background-color: var(--bg-main); /* Utilise ta variable de fond */
+}
+
+.bg-vibrant::after, .bg-vibrant::before {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.15; /* Très léger pour ne pas gêner la lecture */
+    z-index: -1;
+    animation: move 20s infinite alternate;
+}
+
+.bg-vibrant::before {
+    background: #fa243c; /* Rouge Apple */
+    top: -10%;
+    left: -10%;
+}
+
+.bg-vibrant::after {
+    background: #0071e3; /* Bleu Apple */
+    bottom: -10%;
+    right: -10%;
+    animation-delay: -10s;
+}
+
+@keyframes move {
+    from { transform: translate(0, 0); }
+    to { transform: translate(100px, 100px); }
+}
+
+/* On s'assure que le container est au-dessus */
+.container {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-title {
+    background: linear-gradient(135deg, var(--text-main) 30%, #fa243c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+/* Pagination */
+
+.pagination .page-link {
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.pagination .page-link:hover {
+    background-color: var(--accent-blue);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.pagination .disabled .page-link {
+    background-color: transparent;
+    opacity: 0.5;
+    color: var(--text-muted);
+}
+
+/* Animation de la carte entière */
+.apple-card {
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); /* Courbe Apple ultra-fluide */
+    cursor: pointer;
+}
+
+.apple-card:hover {
+    transform: translateY(-8px) scale(1.02); /* La carte monte et grossit légèrement */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Animation spécifique sur l'image à l'intérieur de la carte */
+.apple-card img {
+    transition: transform 0.4s ease;
+}
+
+.apple-card:hover img {
+    transform: scale(1.03); /* Zoom léger sur l'image au survol */
+}
+
+/* Effet sur le bouton Détails */
+.apple-card .btn-outline-primary {
+    transition: all 0.3s ease;
+}
+
+.apple-card:hover .btn-outline-primary {
+    background-color: #0071e3;
+    color: white;
+    border-color: #0071e3;
+}
+.list-group-item {
+    transition: all 0.2s ease;
+}
+
+.list-group-item:hover {
+    background-color: var(--bg-card) !important;
+    padding-left: 20px !important; /* Petit décalage élégant */
+}
+
+/* Header */
+/* Navbar Apple Style */
+.apple-nav {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    padding: 12px 0;
+}
+
+.nav-link {
+    color: var(--text-main) !important;
+    font-weight: 500;
+    font-size: 0.95rem;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+    padding: 8px 16px !important;
+}
+
+.nav-link:hover {
+    opacity: 1;
+    color: var(--accent-red) !important;
+}
+
+/* Style spécial pour le bouton de thème */
+#theme-toggle {
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-main);
+    transition: all 0.3s ease;
+}
+
+#theme-toggle:hover {
+    background: var(--text-main);
+    color: var(--bg-main);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: var(--text-main) !important;
+}
+/* Container de l'image */
+.img-container {
+    position: relative;
+    overflow: hidden;
+    background-color: #f5f5f7; /* Fond gris clair en attendant l'image */
+}
+
+/* L'overlay (le voile qui contient le +) */
+.play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* CENTRAGE ABSOLU */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* LOOK APPLE : Noir translucide avec flou */
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    
+    /* CACHÉ PAR DÉFAUT */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+/* L'icône + elle-même */
+.play-overlay i {
+    color: white;
+    font-size: 3rem; /* Taille imposante mais propre */
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+/* APPARITION AU SURVOL */
+.apple-card:hover .play-overlay {
+    opacity: 1;
+}
+
+.apple-card:hover .play-overlay i {
+    transform: scale(1); /* Petit effet de zoom sur le + */
+}
+
+/* Empêcher le débordement horizontal */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Ajustement du player sur mobile */
+@media (max-width: 576px) {
+    .player-bar {
+        width: 95%;
+        bottom: 10px;
+        height: 60px;
+    }
+    
+    .hero-gradient {
+        padding: 40px 15px;
+        border-radius: 20px;
+    }
+
+    .mood-card {
+        height: 100px;
+    }
+
+    .mood-card i {
+        font-size: 1.5rem;
+    }
+}
+
+/* Désactiver l'effet hover sur tactile (pour éviter les bugs de clic) */
+@media (hover: none) {
+    .apple-card:hover {
+        transform: none;
+    }
+    .play-overlay {
+        display: none !important;
+    }
+}
+
+#backToTop {
+    position: fixed;
+    bottom: 110px; /* Placé au-dessus de la barre de lecture */
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    z-index: 999;
+    display: none; /* Caché par défaut */
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#backToTop:hover {
+    transform: translateY(-5px);
+    background: var(--accent-red);
+    color: white;
+    border-color: var(--accent-red);
+}
+
+/* Sur mobile, on le décale un peu pour ne pas gêner */
+@media (max-width: 576px) {
+    #backToTop {
+        bottom: 90px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* Badge qualité */
+.badge-apple {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #1d1d1f;
+    padding: 6px 15px;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+}
+
+/* Glassmorphism amélioré */
+.glass-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    transition: transform 0.3s ease;
+}
+
+/* Animation de l'image */
+.main-cover {
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.main-cover:hover {
+    transform: scale(1.02) rotate(1deg);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3) !important;
+}
+
+/* Fil d'ariane Apple */
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "•";
+    color: var(--text-muted);
+}
+
+/* Container pour l'empilement des têtes */
+.-space-x-12 {
+    display: flex;
+}
+
+.credit-avatar {
+    width: 32px; /* Taille "tout petit" comme demandé */
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--bg-main); /* Crée la séparation entre les têtes */
+    margin-left: -10px; /* C'est ça qui fait l'effet d'empilement */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    cursor: help;
+}
+
+.credit-avatar:first-child {
+    margin-left: 0;
+}
+
+.credit-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.credit-avatar:hover {
+    transform: translateY(-5px);
+    margin-right: 10px; /* Écarte les autres au survol */
+    z-index: 10;
+}
+
+/* On s'assure que le texte à côté est bien aligné */
+.text-muted strong {
+    color: var(--text-main);
+    font-size: 0.7rem;
+}
+

@@ -1,0 +1,104 @@
+<%- include('partials/_header') %>
+
+<div class="bg-vibrant"></div>
+
+<div class="container py-5">
+    <div class="row align-items-center mb-5">
+        <div class="col-md-5 text-center mb-4 mb-md-0">
+            <div class="album-cover-container position-relative">
+                <img src="<%= album.artworkUrl100.replace('100x100bb', '600x600bb') %>" 
+                     class="img-fluid rounded-4 shadow-apple album-zoom main-cover" 
+                     alt="Pochette Album">
+                
+                <div class="badge-apple">
+                    <i class="bi bi-patch-check-fill"></i> Hi-Res Lossless
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7 ps-md-5">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/objects" class="text-muted text-decoration-none">Catalogue</a></li>
+                    <li class="breadcrumb-item active text-danger fw-bold"><%= album.primaryGenreName %></li>
+                </ol>
+            </nav>
+
+            <h1 class="display-3 fw-bold mb-1 hero-title" style="letter-spacing: -2px;"><%= album.collectionName %></h1>
+            <h2 class="text-secondary fw-medium mb-4"><%= album.artistName %></h2>
+
+            <div class="glass-card p-4 mb-4">
+                <div class="row text-center align-items-center">
+                    <div class="col-4">
+                        <i class="bi bi-calendar3 text-danger mb-2 d-block fs-4"></i>
+                        <small class="text-muted d-block text-uppercase small fw-bold">Sortie</small>
+                        <span class="fw-bold"><%= new Date(album.releaseDate).getFullYear() %></span>
+                    </div>
+                    <div class="col-4 border-start border-end border-opacity-10">
+                        <i class="bi bi-music-note-list text-danger mb-2 d-block fs-4"></i>
+                        <small class="text-muted d-block text-uppercase small fw-bold">Titres</small>
+                        <span class="fw-bold"><%= album.trackCount %></span>
+                    </div>
+                    <div class="col-4">
+                        <i class="bi bi-currency-euro text-danger mb-2 d-block fs-4"></i>
+                        <small class="text-muted d-block text-uppercase small fw-bold">Prix</small>
+                        <span class="fw-bold"><%= album.collectionPrice %> €</span>
+                    </div>
+                </div>
+            </div>
+
+<div class="mb-4">
+    <div class="d-flex flex-wrap gap-3 mb-3">
+        <button onclick="playSong('<%= album.collectionName %>', '<%= album.artistName %>', '<%= album.artworkUrl100 %>', '')" 
+                class="btn btn-danger btn-lg px-5 rounded-pill fw-bold shadow-lg">
+            <i class="bi bi-play-fill me-2"></i> Écouter l'extrait
+        </button>
+        <a href="<%= album.collectionViewUrl %>" target="_blank" class="btn btn-outline-dark btn-lg px-4 rounded-pill fw-bold">
+            <i class="bi bi-apple me-2"></i> Apple Music
+        </a>
+    </div>
+
+    <div class="d-flex align-items-center gap-2 mt-4 ps-1">
+        <div class="d-flex -space-x-12">
+            <div class="credit-avatar shadow-sm" title="Artiste : <%= album.artistName %>">
+                <img src="<%= album.artworkUrl100 %>" alt="Artiste">
+            </div>
+            <div class="credit-avatar shadow-sm bg-dark" title="Beatmaker">
+                <i class="bi bi-cpu-fill text-warning" style="font-size: 0.8rem;"></i>
+            </div>
+            <div class="credit-avatar shadow-sm bg-secondary" title="Ingé Son">
+                <i class="bi bi-sliders text-white" style="font-size: 0.8rem;"></i>
+            </div>
+        </div>
+        <div class="ms-2">
+            <span class="text-muted" style="font-size: 0.75rem; letter-spacing: 0.5px;">
+                AVEC <strong><%= album.artistName %></strong>, PROD. & MIX
+            </span>
+        </div>
+    </div>
+</div>
+
+            <p class="text-muted small opacity-75 mt-5">
+                <i class="bi bi-info-circle me-1"></i> <%= album.copyright %><br>
+                Origine : <%= album.country %> • Label : <%= album.artistName %>
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3 class="fw-bold mb-4">À propos de cet album</h3>
+            <div class="glass-card p-4">
+                <p class="mb-0" style="line-height: 1.8; opacity: 0.9;">
+                    Cet opus de <strong><%= album.artistName %></strong> marque un tournant dans la scène <%= album.primaryGenreName %>. 
+                    Avec <strong><%= album.trackCount %> titres</strong>, l'artiste explore des sonorités modernes tout en conservant 
+                    l'essence qui a fait son succès. Disponible en haute fidélité pour une expérience immersive totale.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<%- include('partials/_footer') %>

@@ -1,0 +1,31 @@
+# --- DÉPENDANCES (Le plus important) ---
+# On ne versionne jamais node_modules car il est recréé par 'npm install'
+node_modules/
+jspm_packages/
+
+# --- CONFIGURATION VERCEL ---
+# Ce dossier est généré localement par Vercel, il ne doit pas être sur Git
+.vercel
+
+# --- LOGS ET DEBUG ---
+# Fichiers de rapports d'erreurs inutiles sur le dépôt
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs
+*.log
+
+# --- ENVIRONNEMENT ---
+# Si tu ajoutes des clés d'API secrètes plus tard
+.env
+.env.local
+
+# --- SYSTÈME ---
+# Fichiers invisibles de Mac et Windows qui polluent le dossier
+.DS_Store
+Thumbs.db
+
+# --- ÉDITEUR ---
+# Paramètres de ton logiciel de code (VS Code, etc.)
+.vscode/
+.idea/
